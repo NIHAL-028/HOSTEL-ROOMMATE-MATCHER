@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Contact Us</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#f8fafc;
+}
+
+/* NAVBAR */
+
+.navbar{
+    width:100%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px 8%;
+    background:white;
+    box-shadow:0 4px 15px rgba(0,0,0,0.1);
+}
+
+.logo-section{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.logo-section img{
+    width:70px;
+}
+
+.logo-section h2{
+    color:#e11d48;
+}
+
+.nav-links{
+    display:flex;
+    list-style:none;
+    gap:30px;
+}
+
+.nav-links a{
+    text-decoration:none;
+    color:#222;
+    font-weight:600;
+}
+
+#darkModeBtn{
+    width:45px;
+    height:45px;
+    border:none;
+    background:#e11d48;
+    color:white;
+    border-radius:50%;
+    cursor:pointer;
+}
+
+/* CONTACT */
+
+.container{
+    width:90%;
+    max-width:1100px;
+    margin:50px auto;
+}
+
+.contact-box{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:40px;
+}
+
+.left,
+.right{
+    background:white;
+    padding:40px;
+    border-radius:25px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.1);
+}
+
+.left h1{
+    color:#e11d48;
+    margin-bottom:20px;
+}
+
+.left p{
+    margin-bottom:15px;
+    line-height:1.8;
+}
+
+input,
+textarea{
+    width:100%;
+    padding:15px;
+    margin:15px 0;
+    border-radius:12px;
+    border:1px solid #ccc;
+}
+
+textarea{
+    height:150px;
+}
+
+button{
+    width:100%;
+    padding:15px;
+    border:none;
+    background:#e11d48;
+    color:white;
+    border-radius:12px;
+    cursor:pointer;
+}
+
+.dark-mode{
+    background:#111827;
+    color:white;
+}
+
+.dark-mode .navbar,
+.dark-mode .left,
+.dark-mode .right{
+    background:#1f2937;
+    color:white;
+}
+
+.dark-mode .nav-links a,
+.dark-mode .logo-section h2{
+    color:white;
+}
+
+.dark-mode input,
+.dark-mode textarea{
+    background:#374151;
+    color:white;
+    border:none;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<nav class="navbar">
+
+    <div class="logo-section">
+
+        <img src="https://www.chitkara.edu.in/chitkara-university-logo.png">
+
+        <h2>RoomieMatch</h2>
+
+    </div>
+
+    <ul class="nav-links">
+
+        <li><a href="index.html">Home</a></li>
+
+        <li><a href="preferences.html">Preferences</a></li>
+
+        <li><a href="matches.html">Matches</a></li>
+
+        <li><a href="about.html">About</a></li>
+
+        <li><a href="contact.html">Contact</a></li>
+
+    </ul>
+
+    <button id="darkModeBtn">🌙</button>
+
+</nav>
+
+
+<!-- CONTACT SECTION -->
+
+<div class="container">
+
+    <div class="contact-box">
+
+        <!-- LEFT -->
+
+        <div class="left">
+
+            <h1>Contact RoomieMatch</h1>
+
+            <p>
+                Need help finding your ideal roommate?
+            </p>
+
+            <p>📍 Chitkara University, Punjab</p>
+
+            <p>📞 +91 9876543210</p>
+
+            <p>📧 support@roomiematch.com</p>
+
+        </div>
+
+
+        <!-- RIGHT -->
+
+        <div class="right">
+
+            <form>
+
+                <input type="text" placeholder="Enter Your Name" required>
+
+                <input type="email" placeholder="Enter Your Email" required>
+
+                <textarea placeholder="Write Your Message"></textarea>
+
+                <button type="submit">
+
+                    Send Message
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+const darkBtn = document.getElementById("darkModeBtn");
+
+darkBtn.addEventListener("click",()=>{
+
+    document.body.classList.toggle("dark-mode");
+
+});
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>RoomieMatch</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+    <!-- NAVBAR -->
+
+    <nav class="navbar">
+
+        <div class="logo-section">
+
+            <img src="https://www.chitkara.edu.in/chitkara-university-logo.png">
+
+            <h2>RoomieMatch</h2>
+
+        </div>
+
+        <ul class="nav-links">
+
+            <li><a href="index.html">Home</a></li>
+
+            <li><a href="about.html">About</a></li>
+
+            <li><a href="contact.html">Contact</a></li>
+
+        </ul>
+
+        <button id="darkModeBtn">🌙</button>
+
+    </nav>
+
+
+    <!-- HERO SECTION -->
+
+    <section class="hero">
+
+        <div class="overlay"></div>
+
+        <div class="hero-content">
+
+            <h1>Find Your Perfect Hostel Roommate</h1>
+
+            <p>
+                Smart roommate matching website for Chitkara students.
+            </p>
+
+            <button onclick="openLoginModal()">
+                Start Matching
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- LOGIN MODAL -->
+
+    <div class="modal" id="loginModal">
+
+        <div class="modal-content">
+
+            <span class="close-btn" onclick="closeLoginModal()">
+                &times;
+            </span>
+
+            <h2>Login</h2>
+
+            <form onsubmit="loginUser(event)">
+
+                <input type="email" placeholder="Enter Email" required>
+
+                <input type="password" placeholder="Enter Password" required>
+
+                <button type="submit">
+                    Login
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>

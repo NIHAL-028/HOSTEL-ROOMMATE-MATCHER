@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Matches</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+    font-family:Poppins;
+    background-image: url("https://digitallearning.eletsonline.com/wp-content/uploads/2020/05/CUPB_Drone.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+}
+
+/* TOP BAR */
+
+.top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px 20px;
+}
+
+.back{
+    padding:8px 12px;
+    border:none;
+    background:#e11d48;
+    color:white;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+h1{
+    text-align:center;
+    color:#e11d48;
+    margin:10px 0;
+}
+
+/* FILTER BOX */
+
+.filter{
+    width:90%;
+    margin:10px auto;
+    display:flex;
+    gap:10px;
+    justify-content:center;
+}
+
+select{
+    padding:10px;
+    border-radius:8px;
+    border:1px solid #ccc;
+}
+
+/* CARDS */
+
+.cards{
+    width:90%;
+    margin:20px auto;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:15px;
+}
+
+.card{
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(5px);
+    padding: 15px;
+    border-radius: 15px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.2);
+}
+
+.name{
+    font-size:18px;
+    font-weight:600;
+}
+
+.room{
+    color:#2563eb;
+    font-weight:600;
+    margin:5px 0;
+}
+
+.match{
+    color:green;
+    font-weight:700;
+}
+
+.contact{
+    font-size:13px;
+    margin-top:8px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="top">
+    <button class="back" onclick="history.back()">← Back</button>
+</div>
+
+<h1>Your Matches</h1>
+
+<!-- ROOM FILTER -->
+<div class="filter">
+
+<select id="roomFilter" onchange="render()">
+    <option value="all">All Rooms</option>
+    <option value="ac_attached">AC + Attached Washroom</option>
+    <option value="cooler_attached">Cooler + Attached Washroom</option>
+</select>
+
+</div>
+
+<div class="cards" id="cards"></div>
+
+<script>
+
+let hobbies = JSON.parse(localStorage.getItem("selectedHobbies")) || [];
+let gender = localStorage.getItem("selectedGender");
+
+const roommates = [
+
+{name:"Arnav Modgil",gender:"male",room:"ac_attached",hobbies:["study","coding","music"],phone:"1111",email:"a@gmail.com"},
+{name:"Rohan Sharma",gender:"male",room:"cooler_attached",hobbies:["gaming","sports","music"],phone:"1112",email:"b@gmail.com"},
+{name:"Aman Verma",gender:"male",room:"ac_attached",hobbies:["study","reading"],phone:"1113",email:"c@gmail.com"},
+{name:"Kabir Singh",gender:"male",room:"cooler_attached",hobbies:["gym","sports"],phone:"1114",email:"d@gmail.com"},
+{name:"Yash Raj",gender:"male",room:"ac_attached",hobbies:["coding","gaming"],phone:"1115",email:"e@gmail.com"},
+{name:"Nikhil Jain",gender:"male",room:"cooler_attached",hobbies:["music","study"],phone:"1116",email:"f@gmail.com"},
+{name:"Rahul Yadav",gender:"male",room:"ac_attached",hobbies:["sports","gym"],phone:"1117",email:"g@gmail.com"},
+{name:"Dev Patel",gender:"male",room:"cooler_attached",hobbies:["music","gaming"],phone:"1118",email:"h@gmail.com"},
+{name:"Manav Gupta",gender:"male",room:"ac_attached",hobbies:["study","sports"],phone:"1119",email:"i@gmail.com"},
+{name:"Aryan Mehta",gender:"male",room:"cooler_attached",hobbies:["reading","music"],phone:"1120",email:"j@gmail.com"},
+
+{name:"Ananya Sharma",gender:"female",room:"ac_attached",hobbies:["study","music"],phone:"2211",email:"k@gmail.com"},
+{name:"Riya Verma",gender:"female",room:"cooler_attached",hobbies:["gaming","sports"],phone:"2212",email:"l@gmail.com"},
+{name:"Simran Kaur",gender:"female",room:"ac_attached",hobbies:["coding","study"],phone:"2213",email:"m@gmail.com"},
+{name:"Neha Gupta",gender:"female",room:"cooler_attached",hobbies:["reading","music"],phone:"2214",email:"n@gmail.com"},
+{name:"Ishita Singh",gender:"female",room:"ac_attached",hobbies:["sports","gaming"],phone:"2215",email:"o@gmail.com"},
+{name:"Kritika Yadav",gender:"female",room:"cooler_attached",hobbies:["coding","music"],phone:"2216",email:"p@gmail.com"},
+{name:"Palak Sharma",gender:"female",room:"ac_attached",hobbies:["gym","reading"],phone:"2217",email:"q@gmail.com"},
+{name:"Meera Joshi",gender:"female",room:"cooler_attached",hobbies:["study","cooking"],phone:"2218",email:"r@gmail.com"},
+{name:"Tanya Malhotra",gender:"female",room:"ac_attached",hobbies:["sports","music"],phone:"2219",email:"s@gmail.com"},
+{name:"Sanya Bhatia",gender:"female",room:"cooler_attached",hobbies:["study","gaming"],phone:"2220",email:"t@gmail.com"}
+
+];
+
+function score(user, person){
+
+    let c = 0;
+
+    user.forEach(h=>{
+        if(person.hobbies.includes(h)) c++;
+    });
+
+    return Math.round((c / person.hobbies.length) * 100);
+}
+
+function render(){
+
+    let room = document.getElementById("roomFilter").value;
+
+    let box = document.getElementById("cards");
+
+    box.innerHTML = "";
+
+    roommates.forEach(p=>{
+
+        if(p.gender !== gender) return;
+
+        if(room !== "all" && p.room !== room) return;
+
+        let s = score(hobbies, p);
+
+        box.innerHTML += `
+        <div class="card">
+
+            <div class="name">${p.name}</div>
+
+            <div class="room">${p.room === "ac_attached"
+                ? "AC + Attached Washroom"
+                : "Cooler + Attached Washroom"}</div>
+
+            <div>Hobbies: ${p.hobbies.join(", ")}</div>
+
+            <div class="match">${s}% Match</div>
+
+            <div class="contact">📞 ${p.phone}<br>📧 ${p.email}</div>
+
+        </div>
+        `;
+    });
+}
+
+render();
+
+</script>
+
+</body>
+</html>

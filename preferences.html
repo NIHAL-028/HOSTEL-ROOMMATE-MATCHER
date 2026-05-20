@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Preferences - RoomieMatch</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background-image: url("https://www.chitkara.edu.in/wp-content/themes/chitkara/images/2026/about/infrastructure/academic-1.webp");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+}
+
+
+.container{
+    width:50%;
+    margin:50px auto;
+
+    background:rgba(255,255,255,0.25);
+
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+
+    border:1px solid rgba(255,255,255,0.3);
+
+    padding:40px;
+    border-radius:20px;
+    box-shadow:0 0 15px rgba(0,0,0,0.2);
+}
+
+h1{
+    text-align:center;
+    color:#e11d48;
+    margin-bottom:20px;
+}
+
+h2{
+    margin-top:20px;
+    margin-bottom:10px;
+}
+
+.checkbox-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:10px;
+}
+
+.card{
+    background:#f1f5f9;
+    padding:12px;
+    border-radius:10px;
+}
+
+button{
+    width:100%;
+    padding:14px;
+    margin-top:25px;
+    border:none;
+    background:#e11d48;
+    color:white;
+    font-size:16px;
+    border-radius:10px;
+    cursor:pointer;
+}
+.top{
+    display:flex;
+    justify-content:flex-start;
+    margin-bottom:10px;
+}
+
+.back{
+    padding:8px 12px;
+    border:none;
+    background:#e11d48;
+    color:white;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:14px;
+    transition:0.2s;
+}
+
+.back:hover{
+    background:#be123c;
+    transform:scale(1.05);
+}
+
+
+</style>
+
+</head>
+
+<body>
+
+
+    
+<div class="container">
+    <div class="top">
+    <button class="back" onclick="window.location.href='index.html'">← Back</button>
+</div>
+
+<h1>Room Preferences</h1>
+
+<form onsubmit="goToMatches(event)">
+
+<h2>Select Gender</h2>
+
+<div class="checkbox-grid">
+
+<label class="card">
+<input type="radio" name="gender" value="male" required> Male
+</label>
+
+<label class="card">
+<input type="radio" name="gender" value="female"> Female
+</label>
+
+</div>
+
+<h2>Select Hobbies</h2>
+
+<div class="checkbox-grid">
+
+<label class="card"><input type="checkbox" value="study" class="hobby"> Study</label>
+<label class="card"><input type="checkbox" value="gaming" class="hobby"> Gaming</label>
+<label class="card"><input type="checkbox" value="coding" class="hobby"> Coding</label>
+<label class="card"><input type="checkbox" value="music" class="hobby"> Music</label>
+<label class="card"><input type="checkbox" value="sports" class="hobby"> Sports</label>
+<label class="card"><input type="checkbox" value="gym" class="hobby"> Gym</label>
+<label class="card"><input type="checkbox" value="reading" class="hobby"> Reading</label>
+<label class="card"><input type="checkbox" value="cooking" class="hobby"> Cooking</label>
+
+</div>
+
+<button type="submit">Find Matches</button>
+
+</form>
+
+</div>
+
+<script>
+
+function goToMatches(e){
+    e.preventDefault();
+
+    let hobbies = [];
+
+    document.querySelectorAll(".hobby:checked").forEach(i=>{
+        hobbies.push(i.value);
+    });
+
+    let gender = document.querySelector('input[name="gender"]:checked').value;
+
+    localStorage.setItem("selectedHobbies", JSON.stringify(hobbies));
+    localStorage.setItem("selectedGender", gender);
+
+    window.location.href = "matches.html";
+}
+
+</script>
+
+</body>
+</html>
